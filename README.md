@@ -1,4 +1,4 @@
-# Mario's Pizza Parlor 🍕
+# Mario's Pizza Parlor
 
 A fully responsive, multi-page demo website for a fictional pizza restaurant.  
 Built from scratch using HTML, CSS, and vanilla JavaScript.
