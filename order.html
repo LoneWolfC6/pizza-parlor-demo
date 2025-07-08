@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Mario's Pizza Parlor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mario's Pizza Parlor</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class = "order-form">
+            <h2>Place Your Order</h2>
+            <form id = "pizza-order-form">
+                <label for = "pizza">Select Your Pizza</label>
+                <select id = "pizza" name = "pizza">
+                    <option value = "">-- Select Pizza --</option>
+                    <option value = "Margherita Pizza">Margherita Pizza</option>
+                    <option value = "Pepperoni Classic">Pepperoni Classic</option>
+                    <option value = "Veggie Delight">Veggie Delight</option>
+                </select>
+
+                <label for = "quantity">Quantity:</label>
+                <input type = "number" id = "quantity" name = "quantity" min = "1" value = "1">
+
+                <button type = "button" id = "add-to-order">Add to Order</button>
+
+                <h3>Current Order:</h3>
+                <ul id = "order-list"></ul>
+
+                <label for = "name">Name:</label>
+                <input type = "text" id = "name" name = "name" required>
+
+                <label for = "phone">Phone Number:</label>
+                <input type = "tel" id = "phone" name = "phone" required>
+
+                <label for = "instructions">Special Instructions</label>
+                <textarea id = "instructions" name = "instructions" rows = "4" placeholder = "Anything we should know?"></textarea>
+
+                <button type = "submit">Submit your Order</button>
+            </form>
+
+            <div class = "confirmation-message" style = "display: none;">
+                <p>Thank you for your order! 🍕 We'll start preparing it right away.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mario's Pizza Parlor</p>
+    </footer>
+
+    <script>
+        const form = document.querySelector('#pizza-order-form');
+    const confirmationMessage = document.querySelector('.confirmation-message');
+    const addToOrderBtn = document.querySelector('#add-to-order');
+    const pizzaSelect = document.querySelector('#pizza');
+    const quantityInput = document.querySelector('#quantity');
+    const orderList = document.querySelector('#order-list');
+    let orderItems = JSON.parse(localStorage.getItem('pizzaOrder')) || [];
+
+    const pizzaPrices = {
+        'Margherita Pizza': 10,
+        'Pepperoni Classic': 12,
+        'Veggie Delight': 11
+    };
+
+    function updateOrderList() {
+        orderList.innerHTML = '';
+        orderItems.forEach((item, index) => {
+            const total = pizzaPrices[item.pizza] * item.quantity;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+            ${item.quantity} x ${item.pizza} ($${total})
+            <button data-index="${index}" class = "remove-btn">Remove</button>
+            `;
+            orderList.appendChild(listItem);
+        });
+
+        localStorage.setItem('pizzaOrder', JSON.stringify(orderItems));
+    }
+
+    addToOrderBtn.addEventListener('click', function() {
+        const pizza = pizzaSelect.value;
+        const quantity = parseInt(quantityInput.value);
+
+        if (pizza && quantity > 0) {
+            orderItems.push({ pizza, quantity });
+            updateOrderList();
+            pizzaSelect.value = '';
+            quantityInput.value = 1;
+        } else {
+            alert('Please select a pizza and enter a valid quantity.');
+        }
+    });
+
+        orderList.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-btn')) {
+                const index = event.target.getAttribute('data-index');
+                orderItems.splice(index, 1);
+                updateOrderList();
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (orderItems.length === 0) {
+                alert('Please add at least one pizza to your order.');
+                return;
+            }
+
+            const name = document.querySelector('#name').value;
+            const phone = document.querySelector('#phone').value;
+            const instructions = document.querySelector('#instructions').value;
+
+            let totalPrice = 0;
+            let summary = `<p><strong>Order Summary for ${name}</strong></p><ul>`;
+                orderItems.forEach(item => {
+                    const price = pizzaPrices[item.pizza] * item.quantity;
+                    totalPrice += price;
+                    summary += `<li>${item.quantity} x ${item.pizza} ($${price})</li>`;
+                });
+                summary += `</ul><p><strong>Phone:</strong> ${phone}</p>`;
+                summary += `<p><strong>Total Price:</strong> $${totalPrice}</p>`;
+
+                if (instructions.trim() !== '') {
+                    summary += `<p><strong>Special Instructions:</strong> ${instructions}</p>`;
+                }
+
+            form.style.display = 'none';
+            confirmationMessage.innerHTML = summary + `<p>Thank you for your order! 🍕 We'll start preparing it right away.</p>`;
+            confirmationMessage.style.display = 'block';
+
+            localStorage.removeItem('pizzaOrder');
+        });
+
+        updateOrderList();
+    </script>
+</body>
+</html>

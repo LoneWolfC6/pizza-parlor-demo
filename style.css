@@ -130,3 +130,74 @@ footer {
   }
 }
 
+.order-form {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form label {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.order-form input,
+.order-form select,
+.order-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.order-form button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.order-form button:hover {
+  background-color: #c0392b;
+}
+
+
+.confirmation-message {
+  padding: 2rem;
+  background-color: #dff0d8;
+  border: 1px solid #3c763d;
+  color: #3c763d;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.remove-btn {
+  margin-left: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
