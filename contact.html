@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Mario's Pizza Parlor</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Mario's Pizza Parlor</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Mario's Pizza Parlor</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="order.html">Order Online</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="contact-section">
-            <h2>Contact Us</h2>
-            <form>
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
+  <!-- Header -->
+  <header>
+    <h1>Mario's Pizza Parlor</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="order.html">Order Online</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
+  <main>
+    <!-- Contact Form Section -->
+    <section class="contact-section">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" placeholder="Tell us what's on your mind..." required></textarea>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required />
 
-                <button type="submit">Send Message</button>
-            </form>
-            
-            <div class="confirmation-message" style="display: none;">
-                <p>Thank you for reaching out! 📬 We’ll get back to you soon.</p>
-            </div>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell us what's on your mind..." required></textarea>
 
-        </section>
-    </main>
+        <button type="submit">Send Message</button>
+      </form>
 
-    <footer>
-        <p>&copy; 2025 Mario's Pizza Parlor</p>
-    </footer>
+      <div class="confirmation-message" style="display: none;">
+        <p>Thank you for reaching out! 📬 We’ll get back to you soon.</p>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        const contactForm = document.querySelector('form');
-        const contactConfirmation = document.querySelector('.confirmation-message');
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mario's Pizza Parlor</p>
+  </footer>
 
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            contactForm.style.display = 'none';
-            contactConfirmation.style.display = 'block';
-        });
-    </script>
-
+  <!-- JavaScript -->
+  <script src="js/main.js" defer></script>
 </body>
 </html>
